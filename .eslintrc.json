@@ -1,6 +1,5 @@
 {
   "env": {
-    "browser": true,
     "es2021": true,
     "jest": true
   },
@@ -19,6 +18,7 @@
     "@typescript-eslint",
     "import"
   ],
+  "ignorePatterns": [ "build/**/*" ],
   "rules": {
     "import/extensions": 0
   },

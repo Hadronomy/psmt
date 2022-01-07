@@ -1,11 +1,11 @@
 #!/bin/node
-import logger from '@/logger';
+import { InitCli } from '@/cli';
 
 /**
- * `dot` main program
+ * `psmt` main program
  */
 async function MainProgram() {
-  logger.log('info', 'Hello');
+  await InitCli();
 }
 
 MainProgram();
