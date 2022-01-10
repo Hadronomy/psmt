@@ -18,7 +18,7 @@
     "@typescript-eslint",
     "import"
   ],
-  "ignorePatterns": [ "build/**/*" ],
+  "ignorePatterns": [ "dist/**/*" ],
   "rules": {
     "import/extensions": 0
   },

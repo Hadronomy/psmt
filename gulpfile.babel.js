@@ -5,9 +5,10 @@ import fs from 'graceful-fs';
 import { posix as path } from 'path';
 import babel from 'gulp-babel';
 import newer from 'gulp-newer';
+import { execSync } from 'child_process';
 
-const DIST_PATH = path.resolve(__dirname, 'build', 'dist');
-const RELEASE_PATH = path.resolve(__dirname, 'build', 'release');
+const DIST_PATH = path.resolve(__dirname, 'dist');
+const RELEASE_PATH = path.resolve(__dirname, 'bin');
 const BABEL_CONF = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'babel.config.json')));
 
 export function clean(cb) {
@@ -30,4 +31,9 @@ export function build(cb) {
   cb();
 }
 
-export default series(clean, build);
+export function definitions(cb) {
+  execSync('yarn tsc');
+  cb();
+}
+
+export default series(clean, build, definitions);
