@@ -1,11 +1,11 @@
 #!/bin/node
-import { InitCli } from '@/cli';
+import { initCli } from '@/cli';
 
 /**
  * `psmt` main program
  */
-async function MainProgram() {
-  await InitCli();
+async function mainProgram() {
+  await initCli();
 }
 
-MainProgram();
+mainProgram();

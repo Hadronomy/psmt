@@ -6,6 +6,11 @@
   "extends": [
       "airbnb-base"
   ],
+  "rules": {
+    "import/extensions": 0,
+    "camelcase": "error",
+    "no-var": "error"
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -19,9 +24,6 @@
     "import"
   ],
   "ignorePatterns": [ "dist/**/*" ],
-  "rules": {
-    "import/extensions": 0
-  },
   "settings": {
     "import/resolver": {
       "typescript": {},

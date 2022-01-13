@@ -2,14 +2,15 @@ import { Arguments } from 'yargs';
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 
-import logger from '@/logger';
+import logger from '@/services/logger';
+import { GithubAPI } from '@/services/api';
 
 /**
  * Sets the logging level of the `logger` depending on which options
  * where passed
  * @param args The arguments retrieved by yargs
  */
-export function SetLoggingLevel(args: Arguments) : void {
+export function setLoggingLevel(args: Arguments) : void {
   if (args.verbose) {
     logger.level = 'verbose';
     logger.warn('Verbose logging has been enabled !');
@@ -25,7 +26,7 @@ export function SetLoggingLevel(args: Arguments) : void {
  * Logs a notice when a command is runned
  * @param args The arguments retrieved by `yargs`
  */
-export function LogExecutionInfo(args: Arguments) : void {
+export function logExecutionInfo(args: Arguments) : void {
   if (args._.length === 0) {
     return;
   }
@@ -37,12 +38,19 @@ export function LogExecutionInfo(args: Arguments) : void {
  * Initializes a `yargs` based cli with all required configuration
  * @returns The arguments retrieved by `yargs`
  */
-export async function InitCli() : Promise<Arguments> {
+export async function initCli() : Promise<Arguments> {
   return yargs(hideBin(process.argv))
     .scriptName('psmt')
     .version('1.0.0')
     .usage('$0 [command] <options>')
     .demandCommand(0)
+    .commandDir('commands')
+    .command('login', '', (myargs) => myargs.option('username', {
+      type: 'string',
+    }), async (args) => {
+      const githubAPI = GithubAPI.create();
+      githubAPI.auth();
+    })
     .recommendCommands()
     .options({
       verbose: {
@@ -58,8 +66,8 @@ export async function InitCli() : Promise<Arguments> {
     })
     .help()
     .middleware([
-      SetLoggingLevel,
-      LogExecutionInfo,
+      setLoggingLevel,
+      logExecutionInfo,
     ])
     .parse();
 }
