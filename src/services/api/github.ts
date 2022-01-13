@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import chalk from 'chalk';
+import open from 'open';
 
 import logger from '@/services/logger';
 import {
@@ -38,8 +39,11 @@ export class GithubAPI implements IAPI, IService {
       client_id: clientID,
       scope: 'repo',
     });
-    logger.info(response.data.verification_uri);
-    logger.info(chalk.bold.cyan(response.data.user_code));
+    logger.info(`${chalk.bold('Wait')} before continuing`);
+    logger.info(
+      `${chalk.bold('Copy')} this code: ${chalk.bold.cyan(response.data.user_code)}`,
+    );
+    open(response.data.verification_uri);
     const pollingResponse = await postPoll(
       {
         interval: response.data.interval,
@@ -61,7 +65,7 @@ export class GithubAPI implements IAPI, IService {
     return this.api.get(url, config);
   }
 
-  async fun(): Promise<string> {
+  async zen(): Promise<string> {
     const response = await this.get('/zen');
     return response.data;
   }
