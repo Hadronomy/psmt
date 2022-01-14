@@ -4,7 +4,7 @@ import open from 'open';
 
 import logger from '@/services/logger';
 import {
-  AuthMethod, IAPI, IPollConfig, IService, postPoll,
+  AuthMethod, IAPI, IService, postPoll,
 } from '@/services/api';
 
 export class GithubAPI implements IAPI, IService {

@@ -23,7 +23,7 @@
     "@typescript-eslint",
     "import"
   ],
-  "ignorePatterns": [ "dist/**/*" ],
+  "ignorePatterns": [ "dist/**/*", ".config/" ],
   "settings": {
     "import/resolver": {
       "typescript": {},

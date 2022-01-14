@@ -66,6 +66,7 @@
     "gulp-newer": "^1.4.0",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
+    "lint-staged": "^12.1.7",
     "node-notifier": "^10.0.0",
     "pkg": "^5.5.1",
     "prettier": "^2.5.1",

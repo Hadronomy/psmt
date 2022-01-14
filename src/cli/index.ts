@@ -38,7 +38,8 @@ export function logExecutionInfo(args: Arguments) : void {
  * Initializes a `yargs` based cli with all required configuration
  * @returns The arguments retrieved by `yargs`
  */
-export async function initCli() : Promise<Arguments> {
+export async function initCli(argv: string[] = process.argv) : Promise<Arguments> {
+  logger.silly(JSON.stringify(process.argv));
   return yargs(hideBin(process.argv))
     .scriptName('psmt')
     .version('1.0.0')
@@ -47,7 +48,7 @@ export async function initCli() : Promise<Arguments> {
     .commandDir('commands')
     .command('login', '', (myargs) => myargs.option('username', {
       type: 'string',
-    }), async (args) => {
+    }), async () => {
       const githubAPI = GithubAPI.create();
       githubAPI.auth();
     })
@@ -69,5 +70,5 @@ export async function initCli() : Promise<Arguments> {
       setLoggingLevel,
       logExecutionInfo,
     ])
-    .parse();
+    .parse(argv);
 }
