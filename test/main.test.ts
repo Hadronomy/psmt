@@ -12,7 +12,7 @@ describe('CLI', () => {
   const init = jest.fn(initCli);
   beforeEach(() => {
     jest.mock('process');
-    jest.spyOn(console, 'log');
+    jest.spyOn(console, 'log').mockImplementation();
     jest.spyOn(process, 'exit').mockImplementation();
   });
   afterEach(() => {
