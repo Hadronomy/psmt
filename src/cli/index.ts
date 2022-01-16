@@ -34,8 +34,9 @@ export function logExecutionInfo(args: Arguments) : void {
   if (args._.length === 0) {
     return;
   }
-  logger.verbose(`Running "${args._[0]}" command with args: `);
-  logger.verbose(`\n${JSON.stringify(args, null, 2)}`);
+  logger.verbose(`Running ${args._[0]} command...`);
+  logger.silly('With args: ');
+  logger.silly(`\n${JSON.stringify(args, null, 2)}`);
 }
 
 /**
