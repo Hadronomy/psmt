@@ -57,19 +57,18 @@ export async function initCli(argv: string[] = process.argv) : Promise<Arguments
       githubAPI.auth();
     })
     .command(
-      'template',
+      'template <input-path> <output-path>',
       '',
       (myargs) => myargs
-        .option('inputPath', {
+        .positional('input-path', {
+          describe: 'The path of the template file',
           type: 'string',
         })
-        .option('outputPath', {
+        .positional('output-path', {
+          describe: 'The output file path of the substituted template',
           type: 'string',
-        })
-        .demandOption('inputPath')
-        .demandOption('outputPath'),
+        }),
       async (args) => {
-        logger.silly('Starting template command...');
         if (args.inputPath !== undefined) {
           const inputFile = fs.readFileSync(args.inputPath).toString();
           const templateParams = _.chain(mustache.parse(inputFile))
