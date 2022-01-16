@@ -3,6 +3,7 @@ export function merge<TElement>(first: TElement, second: Object) : TElement {
 }
 
 export function sleep(ms: number): Promise<void> {
+  // eslint-disable-next-line no-promise-executor-return
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
 
