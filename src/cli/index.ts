@@ -5,6 +5,10 @@ import { hideBin } from 'yargs/helpers';
 import logger from '@/services/logger';
 import { GithubAPI } from '@/services/api';
 
+import mustache from 'mustache';
+import fs from 'graceful-fs';
+import _ from 'lodash';
+
 /**
  * Sets the logging level of the `logger` depending on which options
  * where passed
@@ -39,8 +43,7 @@ export function logExecutionInfo(args: Arguments) : void {
  * @returns The arguments retrieved by `yargs`
  */
 export async function initCli(argv: string[] = process.argv) : Promise<Arguments> {
-  logger.silly(JSON.stringify(process.argv));
-  return yargs(hideBin(process.argv))
+  return yargs(hideBin(argv))
     .scriptName('psmt')
     .version('1.0.0')
     .usage('$0 [command] <options>')
@@ -52,6 +55,34 @@ export async function initCli(argv: string[] = process.argv) : Promise<Arguments
       const githubAPI = GithubAPI.create();
       githubAPI.auth();
     })
+    .command(
+      'template',
+      '',
+      (myargs) => myargs
+        .option('inputPath', {
+          type: 'string',
+        })
+        .option('outputPath', {
+          type: 'string',
+        })
+        .demandOption('inputPath')
+        .demandOption('outputPath'),
+      async (args) => {
+        logger.silly('Starting template command...');
+        if (args.inputPath !== undefined) {
+          const inputFile = fs.readFileSync(args.inputPath).toString();
+          const templateParams = _.chain(mustache.parse(inputFile))
+            .map((token) => {
+              const name = token[1];
+              return name;
+            })
+            .flatten()
+            .uniq()
+            .value();
+          logger.verbose(`\n${JSON.stringify(templateParams, null, 2)}`);
+        }
+      },
+    )
     .recommendCommands()
     .options({
       verbose: {
@@ -70,5 +101,5 @@ export async function initCli(argv: string[] = process.argv) : Promise<Arguments
       setLoggingLevel,
       logExecutionInfo,
     ])
-    .parse(argv);
+    .parse();
 }

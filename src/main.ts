@@ -5,7 +5,7 @@ import { initCli } from '@/cli';
  * `psmt` main program
  */
 async function mainProgram() {
-  await initCli();
+  await initCli(process.argv);
 }
 
 mainProgram();
