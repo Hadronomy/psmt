@@ -2,7 +2,7 @@ import winston from 'winston';
 import { merge } from '@/utils';
 
 function format(info : winston.Logform.TransformableInfo) : string {
-  return `${info.timestamp} ${info.label || '-'} ${info.level}: ${info.message}`;
+  return `${info.label || ''}${info.level}: ${info.message}`;
 }
 
 export const defaultOptions : winston.LoggerOptions = {
