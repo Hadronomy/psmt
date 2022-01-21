@@ -7,7 +7,7 @@ import { merge } from '@/utils';
  * @returns string
  */
 function format(info : winston.Logform.TransformableInfo) : string {
-  return `${info.label || ''}${info.level}: ${info.message}`;
+  return `${info.label || ''}${info.level} ${info.message}`;
 }
 
 /**
