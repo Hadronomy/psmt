@@ -67,16 +67,9 @@ Thank you to all the people who already contributed to this project!
 List of maintainers, replace all `href`, `src` attributes by your maintainers datas.
 <table>
   <tr>
-    <td align="center"><a href="https://lucastostee.now.sh/"><img src="https://avatars3.githubusercontent.com/u/22588842?s=460&v=4" width="100px;" alt="Tostee Lucas"/><br /><sub><b>Tostee Lucas</b></sub></a><br /><a href="#" title="Code">💻</a></td>
+    <td align="center"><a href="https://hadronomy.com/"><img src="https://avatars3.githubusercontent.com/u/17086478?s=460&v=4" width="100px;" alt="Hadronomy"/><br /><sub><b>Hadronomy</b></sub></a><br /><a href="#" title="Code">💻</a></td>
   </tr>
 </table>
 
 ## License ⚖️
-Enter what kind of license you're using.
-
----
-<div align="center">
-	<b>
-		<a href="https://www.npmjs.com/package/get-good-readme">File generated with get-good-readme module</a>
-	</b>
-</div>
+MIT
