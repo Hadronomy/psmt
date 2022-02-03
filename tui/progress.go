@@ -1,4 +1,4 @@
-package main
+package tui
 
 import (
 	"fmt"
@@ -20,25 +20,13 @@ const (
 
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#626262")).Render
 
-func main() {
-	m := model{
-		progress: progress.New(progress.WithDefaultGradient()),
-		help:     help.New(),
-		keys:     keys,
-	}
-
-	if err := tea.NewProgram(m).Start(); err != nil {
-		fmt.Println("Oh no!", err)
-		os.Exit(1)
-	}
-}
-
+type progressProgram struct{}
 type tickMsg time.Time
 
-type model struct {
-	progress progress.Model
-	help     help.Model
-	keys     keyMap
+type Model struct {
+	Progress progress.Model
+	Help     help.Model
+	Keys     keyMap
 }
 
 type keyMap struct {
@@ -56,7 +44,7 @@ func (k keyMap) FullHelp() [][]key.Binding {
 	}
 }
 
-var keys = keyMap{
+var Keys = keyMap{
 	Help: key.NewBinding(
 		key.WithKeys("?"),
 		key.WithHelp("?", "toggle help"),
@@ -67,43 +55,43 @@ var keys = keyMap{
 	),
 }
 
-func (_ model) Init() tea.Cmd {
+func (_ Model) Init() tea.Cmd {
 	return tickCmd()
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch {
-		case key.Matches(msg, m.keys.Help):
+		case key.Matches(msg, m.Keys.Help):
 			return m, nil
-		case key.Matches(msg, m.keys.Quit):
+		case key.Matches(msg, m.Keys.Quit):
 			return m, tea.Quit
 		default:
 			return m, nil
 		}
 
 	case tea.WindowSizeMsg:
-		m.progress.Width = msg.Width - padding*2 - 4
-		if m.progress.Width > maxWidth {
-			m.progress.Width = maxWidth
+		m.Progress.Width = msg.Width - padding*2 - 4
+		if m.Progress.Width > maxWidth {
+			m.Progress.Width = maxWidth
 		}
 		return m, nil
 
 	case tickMsg:
-		if m.progress.Percent() == 1.0 {
+		if m.Progress.Percent() == 1.0 {
 			return m, tea.Quit
 		}
 
 		// Note that you can also use progress.Model.SetPercent to set the
 		// percentage value explicitly, too.
-		cmd := m.progress.IncrPercent(0.1)
+		cmd := m.Progress.IncrPercent(0.1)
 		return m, tea.Batch(tickCmd(), cmd)
 
 	// FrameMsg is sent when the progress bar wants to animate itself
 	case progress.FrameMsg:
-		progressModel, cmd := m.progress.Update(msg)
-		m.progress = progressModel.(progress.Model)
+		progressModel, cmd := m.Progress.Update(msg)
+		m.Progress = progressModel.(progress.Model)
 		return m, cmd
 
 	default:
@@ -111,16 +99,34 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 }
 
-func (e model) View() string {
+func (e Model) View() string {
 	pad := strings.Repeat(" ", padding)
 	return "\n" +
-		pad + "Downloading prayers" + pad + e.progress.View() + "\n\n" +
-		pad + e.help.View(e.keys)
-
+		pad + "Downloading prayers" + pad + e.Progress.View() + "\n\n" +
+		pad + e.Help.View(e.Keys)
 }
 
 func tickCmd() tea.Cmd {
 	return tea.Tick(time.Second*1, func(t time.Time) tea.Msg {
 		return tickMsg(t)
 	})
+}
+
+func Run() *tea.Program {
+	m := Model{
+		Progress: progress.New(progress.WithDefaultGradient()),
+		Help:     help.New(),
+		Keys:     Keys,
+	}
+	return RunWithModel(m)
+}
+
+func RunWithModel(model Model) *tea.Program {
+	program := tea.NewProgram(model)
+	if err := program.Start(); err != nil {
+		fmt.Println("Uo")
+		fmt.Println("An unexpected error ocurred !")
+		os.Exit(1)
+	}
+	return program
 }
