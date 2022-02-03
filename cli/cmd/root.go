@@ -8,13 +8,14 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "gocli",
-	Short: "Just random testing with bubble tea and cobra",
+	Use:     "gocli",
+	Version: "1.0.0",
+	Short:   "Just random testing with bubble tea and cobra",
 	Long: `
 Yep... Just a silly little sandbox			
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Empty for now
+		cmd.Help()
 	},
 }
 
