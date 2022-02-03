@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "gocli",
-	Short: "Just random testing with bubbles and cobra",
+	Short: "Just random testing with bubble tea and cobra",
 	Long: `
 Yep... Just a silly little sandbox			
 	`,
