@@ -11,6 +11,7 @@ builds:
       - CGO_ENABLED=0
     ldflags:
       - -s -w -X github.com/hadronomy/gocli/internal/build.Version={{.Version}}
+      - -s -w -X github.com/hadronomy/gocli/internal/build.Date={{.Date}}
     goos:
       - linux
       - windows
