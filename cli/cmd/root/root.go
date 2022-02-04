@@ -28,6 +28,6 @@ func NewCmdRoot(version, buildDate string) *cobra.Command {
 		},
 	}
 	root.AddCommand(markdownCmd.NewMarkdownCmd())
-	root.PersistentFlags().Bool("build-date", false, "Returns the date and time when this binary was built")
+	root.PersistentFlags().Bool("build-date", false, "Prints the date and time when this binary was built")
 	return root
 }
