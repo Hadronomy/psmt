@@ -17,9 +17,24 @@ var markdownCmd = &cobra.Command{
 	Short: "Request user information in a lovely way",
 	Run: func(cmd *cobra.Command, args []string) {
 		in := `
-# My little markdown
-## Subtitle
-Just a little [glamour](https://github.com/charmbracelet/glamour) test
+# gocli
+Yep... Just a silly little sandbox
+
+## Usage:
+	gocli [flags]
+	gocli [command]
+
+## Available Commands:
+- **completion**  Generate the autocompletion script for the specified shell
+- **help**        Help about any command
+- **markdown**    Request user information in a lovely way
+- **version**     Prints the tool version
+
+## Flags:
+- -h, --help      help for gocli
+- -v, --version   version for gocli
+
+Use "gocli [command] --help" for more information about a command.
 `
 		out, err := glamour.Render(in, "dark")
 		if err != nil {
