@@ -6,7 +6,7 @@ import (
 
 var Version = "DEV"
 
-var Date = ""
+var Date = "Unknown"
 
 func init() {
 	if Version == "DEV" {
