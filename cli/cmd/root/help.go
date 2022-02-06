@@ -8,7 +8,6 @@ import (
 
 	"github.com/charmbracelet/glamour"
 	"github.com/spf13/cobra"
-	"golang.org/x/crypto/ssh/terminal"
 )
 
 func rootHelpFunc(c *cobra.Command, s []string) {
@@ -21,10 +20,8 @@ func rootHelpFunc(c *cobra.Command, s []string) {
 }
 
 func newTermRenderer() *glamour.TermRenderer {
-	width, _, _ := terminal.GetSize(int(os.Stdout.Fd()))
 	renderer, _ := glamour.NewTermRenderer(
 		glamour.WithAutoStyle(),
-		glamour.WithWordWrap(width),
 		glamour.WithEmoji(),
 	)
 	return renderer
