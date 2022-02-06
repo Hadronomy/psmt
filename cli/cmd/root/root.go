@@ -27,7 +27,10 @@ Yep... Just a silly little sandbox
 			cmd.Help()
 		},
 	}
-	root.AddCommand(markdownCmd.NewMarkdownCmd())
+
+	root.SetHelpFunc(rootHelpFunc)
 	root.PersistentFlags().Bool("build-date", false, "Prints the date and time when this binary was built")
+
+	root.AddCommand(markdownCmd.NewMarkdownCmd())
 	return root
 }
