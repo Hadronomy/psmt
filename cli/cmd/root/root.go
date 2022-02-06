@@ -15,8 +15,8 @@ func NewCmdRoot(version, buildDate string) *cobra.Command {
 		Version: version,
 		Short:   "Just random testing with bubble tea and cobra",
 		Long: `
-Yep... Just a silly little sandbox			
-		`,
+A little sandbox cli to test the capabilitites of cobra and any other package that
+I find interesting`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			if value, err := cmd.Flags().GetBool("build-date"); err == nil && value {
 				fmt.Println(build.Date)

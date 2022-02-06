@@ -39,5 +39,6 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/yuin/goldmark v1.4.4 // indirect
 	github.com/yuin/goldmark-emoji v1.0.1 // indirect
-	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
+	golang.org/x/crypto v0.0.0-20220131195533-30dcbda58838
+	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 )

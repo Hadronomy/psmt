@@ -8,14 +8,26 @@ import (
 
 	"github.com/charmbracelet/glamour"
 	"github.com/spf13/cobra"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 func rootHelpFunc(c *cobra.Command, s []string) {
-	out, err := glamour.Render(generateHelp(c), "dark")
+	r := newTermRenderer()
+	out, err := r.Render(generateHelp(c))
 	if err != nil || out == "" {
 		os.Exit(1)
 	}
 	fmt.Print(out)
+}
+
+func newTermRenderer() *glamour.TermRenderer {
+	width, _, _ := terminal.GetSize(int(os.Stdout.Fd()))
+	renderer, _ := glamour.NewTermRenderer(
+		glamour.WithAutoStyle(),
+		glamour.WithWordWrap(width),
+		glamour.WithEmoji(),
+	)
+	return renderer
 }
 
 func generateHelp(c *cobra.Command) string {
@@ -50,11 +62,6 @@ func generateHelp(c *cobra.Command) string {
 
 func dedent(s string) string {
 	lines := strings.Split(s, "\n")
-
-	/*if minIndent <= 0 {
-		return s
-	}*/
-
 	var buf bytes.Buffer
 	for _, l := range lines {
 		if len(l) == 0 {
