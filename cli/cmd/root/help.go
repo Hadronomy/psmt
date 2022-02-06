@@ -33,12 +33,18 @@ func generateHelp(c *cobra.Command) string {
 	if c.Short != "" {
 		help += c.Long + "\n\n"
 	}
-	help += "## Usage" + "\n"
 	if c.UseLine() != "" {
+		help += "## Usage" + "\n"
 		help += "\t" + c.UseLine() + "\n"
 	}
 	if c.HasAvailableSubCommands() {
 		help += "\t" + c.CommandPath() + " [command]" + "\n\n"
+	}
+	if c.Example != "" {
+		help += "## Example" + "\n"
+		help += c.Example + "\n\n"
+	}
+	if c.HasAvailableSubCommands() {
 		help += "## Avaidable Commands" + "\n"
 		for _, subcommand := range c.Commands() {
 			help += "- **" + subcommand.Name() + "**\t" + subcommand.Short + "\n"
