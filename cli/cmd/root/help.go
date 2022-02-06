@@ -29,7 +29,7 @@ func newTermRenderer() *glamour.TermRenderer {
 
 func generateHelp(c *cobra.Command) string {
 	var help string
-	help += "# " + c.Name() + "\n"
+	help += "# " + c.CommandPath() + "\n"
 	if c.Short != "" {
 		help += c.Long + "\n\n"
 	}
@@ -38,7 +38,7 @@ func generateHelp(c *cobra.Command) string {
 		help += "\t" + c.UseLine() + "\n"
 	}
 	if c.HasAvailableSubCommands() {
-		help += "\t" + c.Use + " [command]" + "\n\n"
+		help += "\t" + c.CommandPath() + " [command]" + "\n\n"
 		help += "## Avaidable Commands" + "\n"
 		for _, subcommand := range c.Commands() {
 			help += "- **" + subcommand.Name() + "**\t" + subcommand.Short + "\n"
@@ -52,7 +52,7 @@ func generateHelp(c *cobra.Command) string {
 	}
 	if c.HasAvailableSubCommands() {
 		help += "\n"
-		help += "Use \"" + c.Use + " [command] --help for more information about a command"
+		help += "Use \"" + c.CommandPath() + " [command] --help for more information about a command"
 	}
 	return help
 }
