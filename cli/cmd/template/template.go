@@ -3,6 +3,7 @@ package template
 import (
 	"fmt"
 
+	initCmd "github.com/hadronomy/psmt/cli/cmd/template/init"
 	"github.com/spf13/cobra"
 )
 
@@ -14,5 +15,6 @@ func NewCmdTemplate() *cobra.Command {
 			fmt.Println("WIP")
 		},
 	}
+	template.AddCommand(initCmd.NewCmdInit())
 	return template
 }
