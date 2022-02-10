@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hadronomy/gocli/cli"
+	"github.com/hadronomy/psmt/cli"
 )
 
 func main() {

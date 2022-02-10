@@ -1,4 +1,4 @@
-module github.com/hadronomy/gocli
+module github.com/hadronomy/psmt
 
 go 1.17
 

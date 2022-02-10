@@ -4,19 +4,18 @@ import (
 	"fmt"
 	"os"
 
-	markdownCmd "github.com/hadronomy/gocli/cli/cmd/markdown"
-	"github.com/hadronomy/gocli/internal/build"
+	templateCmd "github.com/hadronomy/psmt/cli/cmd/template"
+	"github.com/hadronomy/psmt/internal/build"
 	"github.com/spf13/cobra"
 )
 
 func NewCmdRoot(version, buildDate string) *cobra.Command {
 	root := &cobra.Command{
-		Use:     "gocli",
+		Use:     "psmt",
 		Version: version,
-		Short:   "Just random testing with bubble tea and cobra",
+		Short:   "Please save my time :cry:",
 		Long: `
-A little sandbox cli to test the capabilities of cobra and any other package that
-I find interesting`,
+A command line toolbox to save you, your time`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			if value, err := cmd.Flags().GetBool("build-date"); err == nil && value {
 				fmt.Println(build.Date)
@@ -31,6 +30,6 @@ I find interesting`,
 	root.SetHelpFunc(rootHelpFunc)
 	root.PersistentFlags().Bool("build-date", false, "Prints the date and time when this binary was built")
 
-	root.AddCommand(markdownCmd.NewMarkdownCmd())
+	root.AddCommand(templateCmd.NewCmdTemplate())
 	return root
 }

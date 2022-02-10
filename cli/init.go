@@ -1,8 +1,8 @@
 package cli
 
 import (
-	rootCmd "github.com/hadronomy/gocli/cli/cmd/root"
-	"github.com/hadronomy/gocli/internal/build"
+	rootCmd "github.com/hadronomy/psmt/cli/cmd/root"
+	"github.com/hadronomy/psmt/internal/build"
 )
 
 func Init() {
