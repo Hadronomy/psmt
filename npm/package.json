@@ -1,0 +1,10 @@
+{
+  "name": "gocli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Pablo Hernández Jiménez <hadronomy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "go-npm": "^0.1.9"
+  }
+}
