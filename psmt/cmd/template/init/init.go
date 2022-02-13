@@ -15,6 +15,6 @@ func NewCmdInit() *cobra.Command {
 			fmt.Println("WIP")
 		},
 	}
-	
+
 	return init
 }

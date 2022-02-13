@@ -3,7 +3,7 @@ package template
 import (
 	"fmt"
 
-	initCmd "github.com/hadronomy/psmt/cli/cmd/template/init"
+	initCmd "github.com/hadronomy/psmt/psmt/cmd/template/init"
 	"github.com/spf13/cobra"
 )
 

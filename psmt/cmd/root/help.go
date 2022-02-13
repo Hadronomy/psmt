@@ -17,6 +17,7 @@ func rootHelpFunc(c *cobra.Command, s []string) {
 		os.Exit(1)
 	}
 	fmt.Print(out)
+	fmt.Print(generateHelp(c))
 }
 
 func newTermRenderer() *glamour.TermRenderer {
