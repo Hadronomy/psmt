@@ -3,14 +3,16 @@ package root
 import (
 	"fmt"
 	"os"
+	"path"
 
-	templateCmd "github.com/hadronomy/psmt/psmt/cmd/template"
 	"github.com/hadronomy/psmt/internal/build"
+	templateCmd "github.com/hadronomy/psmt/psmt/cmd/template"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
+var Root *cobra.Command
 var cfgFile string
 
 func NewCmdRoot(version, buildDate string) *cobra.Command {
@@ -33,40 +35,36 @@ A command line toolbox to save you, your time`,
 
 	root.SetHelpFunc(rootHelpFunc)
 	root.PersistentFlags().Bool("build-date", false, "Prints the date and time when this binary was built")
-	root.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.psmt.yaml)")
+	root.PersistentFlags().StringVar(&cfgFile, "config", "", "Overrides the default config file with the specified one")
 
 	root.AddCommand(templateCmd.NewCmdTemplate())
 	return root
 }
 
+/*
+Initializes and executes the cli program
+*/
 func Execute() {
-	if err := NewCmdRoot(build.Version, build.Date).Execute(); err != nil {
+	Root = NewCmdRoot(build.Version, build.Date)
+	if err := Root.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
-// initConfig reads in config file and ENV variables if set.
 func initConfig() {
 	if cfgFile != "" {
-		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Find home directory.
 		home, err := homedir.Dir()
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-
-		// Search config in home directory with name ".psmt" (without extension).
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".psmt")
+		viper.AddConfigPath(path.Join(home, ".config", "psmt"))
+		viper.SetConfigName("psmt")
+		viper.AutomaticEnv()
 	}
-
-	viper.AutomaticEnv() // read in environment variables that match
-
-	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
