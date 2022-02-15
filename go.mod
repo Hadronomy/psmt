@@ -15,7 +15,11 @@ require (
 
 require (
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
+	github.com/mattn/go-colorable v0.1.12 // indirect
+	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	golang.org/x/term v0.0.0-20210503060354-a79de5458b56 // indirect
 )
 
 require (
@@ -25,6 +29,7 @@ require (
 )
 
 require (
+	github.com/AlecAivazis/survey/v2 v2.3.2
 	github.com/alecthomas/chroma v0.10.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
