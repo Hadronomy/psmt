@@ -1,7 +1,8 @@
 package init
 
 import (
-	"fmt"
+	"os"
+	"path"
 
 	"github.com/spf13/cobra"
 )
@@ -12,9 +13,9 @@ func NewCmdInit() *cobra.Command {
 		Short:   "Initializes a new template project",
 		Example: "init",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("WIP")
+			pwd, _ := os.Getwd()
+			os.Create(path.Join(pwd, "template.psmt.yaml"))
 		},
 	}
-
 	return init
 }
