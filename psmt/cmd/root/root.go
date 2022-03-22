@@ -6,6 +6,7 @@ import (
 	"path"
 
 	"github.com/hadronomy/psmt/internal/build"
+	daemonCmd "github.com/hadronomy/psmt/psmt/cmd/daemon"
 	templateCmd "github.com/hadronomy/psmt/psmt/cmd/template"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
@@ -38,6 +39,7 @@ A command line toolbox to save you, your time`,
 	root.PersistentFlags().StringVar(&cfgFile, "config", "", "Overrides the default config file with the specified one")
 
 	root.AddCommand(templateCmd.NewCmdTemplate())
+	root.AddCommand(daemonCmd.NewCmdDaemon())
 	return root
 }
 
