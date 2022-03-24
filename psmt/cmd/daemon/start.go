@@ -7,10 +7,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewCmdDaemon() *cobra.Command {
-	daemon := &cobra.Command{
-		Use:   "daemon",
-		Short: "Manages the psmt daemon system",
+func NewCmdStart() *cobra.Command {
+	start := &cobra.Command{
+		Use:   "start [daemon-name]",
+		Short: "Starts the specified daemon",
 		Run: func(cmd *cobra.Command, args []string) {
 			style := lipgloss.NewStyle().
 				Bold(true).
@@ -19,7 +19,5 @@ func NewCmdDaemon() *cobra.Command {
 			fmt.Println(style.Render("WIP"))
 		},
 	}
-	daemon.AddCommand(NewCmdStart())
-	daemon.AddCommand(NewCmdStop())
-	return daemon
+	return start
 }
