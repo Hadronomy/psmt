@@ -58,7 +58,7 @@ func generateHelp(c *cobra.Command) string {
 	}
 	if c.HasAvailableSubCommands() {
 		help += "\n"
-		help += "Use \"" + c.CommandPath() + " [command] --help for more information about a command"
+		help += "Use \"" + c.CommandPath() + " [command] --help\" for more information about a command"
 	}
 	return help
 }

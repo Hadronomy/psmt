@@ -16,6 +16,7 @@ builds:
       - linux
       - windows
       - darwin
+    main: ./psmt
 archives:
   - replacements:
       darwin: Darwin

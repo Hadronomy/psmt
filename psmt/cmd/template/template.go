@@ -14,5 +14,6 @@ func NewCmdTemplate() *cobra.Command {
 			fmt.Println("WIP")
 		},
 	}
+	template.AddCommand(NewCmdInit())
 	return template
 }
